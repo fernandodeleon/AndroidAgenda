@@ -23,16 +23,19 @@ public class RecyclerViewFragmentPresenter implements IRecyclerViewFragmentPrese
     public RecyclerViewFragmentPresenter(IRecyclerViewFragmentView iRecyclerViewFragmentView, Context context){
         this.iRecyclerViewFragmentView = iRecyclerViewFragmentView;
         this.context = context;
+        obtenerContactosBaseDatos();
     }
 
     @Override
     public void obtenerContactosBaseDatos() {
         constructorContactos = new ConstructorContactos(context);
         contactos = constructorContactos.obtenerDatos();
+        mostrarContactosRV();
     }
 
     @Override
-    public void mostrarContactos() {
+    public void mostrarContactosRV() {
         iRecyclerViewFragmentView.inicializarAdaptadorRV(iRecyclerViewFragmentView.crearAdaptador(contactos));
+        iRecyclerViewFragmentView.generarLinearLayoutVertical();
     }
 }

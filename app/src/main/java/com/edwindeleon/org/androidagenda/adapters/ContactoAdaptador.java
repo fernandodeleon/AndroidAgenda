@@ -1,5 +1,6 @@
 package com.edwindeleon.org.androidagenda.adapters;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edwindeleon.org.androidagenda.R;
+import com.edwindeleon.org.androidagenda.activities.Contactos;
 import com.edwindeleon.org.androidagenda.activities.DetalleContactos;
 import com.edwindeleon.org.androidagenda.beans.Contacto;
 
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 
 public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.ContactoViewHolder>{
 
-    ArrayList<Contacto> contactos;
+    private ArrayList<Contacto> contactos;
 
     public ContactoAdaptador(ArrayList<Contacto> contactosVienen){
         this.contactos = contactosVienen;
@@ -39,35 +41,34 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
 
     //Asocia cada elemento de la lista con cada view
     @Override
-    public void onBindViewHolder(final ContactoViewHolder contactoViewHolder, int position) {
-        final Contacto contacto = contactos.get(position);
+    public void onBindViewHolder(ContactoViewHolder contactoViewHolder, int position) {
+        Contacto contacto = contactos.get(position);
         contactoViewHolder.imgFoto.setImageResource(contacto.getFoto());
         contactoViewHolder.tvNombreCV.setText(contacto.getNombre());
         contactoViewHolder.tvTelefonoCV.setText(contacto.getTelefono());
         contactoViewHolder.tvCorreoCV.setText(contacto.getCorreo());
         contactoViewHolder.tvLikes.setText(String.valueOf(contacto.getLike()) + " Likes");
 
-        /*contactoViewHolder.imgFoto.setOnClickListener((View v) -> {
+        /*contactoViewHolder.imgFoto.setOnClickListener((View activity) -> {
 
-            Intent intent = new Intent(activity, DetalleContactos.class);
+            Intent intent = new Intent(activity.getContext(), DetalleContactos.class);
 
-            Toast.makeText(activity, contacto.getNombre(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity.getContext(), contacto.getNombre(), Toast.LENGTH_SHORT).show();
             intent.putExtra("nombre", contacto.getNombre());
             intent.putExtra("telefono", contacto.getTelefono());
             intent.putExtra("correo", contacto.getCorreo());
             activity.startActivity(intent);
-        });
-
-        contactoViewHolder.btnLike.setOnClickListener((View v) -> {
-            Toast.makeText(activity,"Diste like a: " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
         });*/
+
+
+        contactoViewHolder.btnLike.setOnClickListener((View activity) -> {
+            Toast.makeText(activity.getContext(), "Diste like a: " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     //Cantidad de elementos que tiene mi lista
     @Override
-    public int getItemCount() {
-        return contactos.size();
-    }
+    public int getItemCount() { return contactos.size(); }
 
     public static class ContactoViewHolder extends RecyclerView.ViewHolder{
         private ImageView imgFoto;
@@ -87,4 +88,6 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
         }
     }
+
+
 }

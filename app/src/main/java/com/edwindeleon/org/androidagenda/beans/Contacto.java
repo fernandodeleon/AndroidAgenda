@@ -5,6 +5,7 @@ package com.edwindeleon.org.androidagenda.beans;
  */
 
 public class Contacto {
+
     public int idContacto;
     public int foto;
     public String nombre;

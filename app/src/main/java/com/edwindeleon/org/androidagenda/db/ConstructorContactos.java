@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class ConstructorContactos {
 
-
     public int idContacto = 0;
     private Context context;
 
