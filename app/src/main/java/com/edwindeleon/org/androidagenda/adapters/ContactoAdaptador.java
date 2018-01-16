@@ -3,6 +3,7 @@ package com.edwindeleon.org.androidagenda.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
         contactoViewHolder.tvCorreoCV.setText(contacto.getCorreo());
         contactoViewHolder.tvLikes.setText(String.valueOf(contacto.getLike()) + " Likes");
 
-        /*contactoViewHolder.imgFoto.setOnClickListener((View activity) -> {
+        contactoViewHolder.imgFoto.setOnClickListener((View activity) -> {
 
             Intent intent = new Intent(activity.getContext(), DetalleContactos.class);
 
@@ -57,8 +58,8 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             intent.putExtra("nombre", contacto.getNombre());
             intent.putExtra("telefono", contacto.getTelefono());
             intent.putExtra("correo", contacto.getCorreo());
-            activity.startActivity(intent);
-        });*/
+            activity.getContext().startActivity(intent);
+        });
 
 
         contactoViewHolder.btnLike.setOnClickListener((View activity) -> {

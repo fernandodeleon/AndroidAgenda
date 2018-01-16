@@ -1,5 +1,6 @@
 package com.edwindeleon.org.androidagenda.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import com.edwindeleon.org.androidagenda.R;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class ConstructorContactos {
 
-    public int idContacto = 0;
+    //public int idContacto = 0;
     private Context context;
 
     public ConstructorContactos(Context context){
@@ -22,7 +23,7 @@ public class ConstructorContactos {
     }
 
     public ArrayList<Contacto> obtenerDatos(){
-        idContacto++;
+        /*idContacto++;
         ArrayList<Contacto> listaContactos = new ArrayList<>();
 
         listaContactos.add(new Contacto(idContacto, R.drawable.mt_03, "Juana", "45879639", "juana2016@hotmail.com", 5));
@@ -30,6 +31,34 @@ public class ConstructorContactos {
         listaContactos.add(new Contacto(idContacto, R.drawable.mt_03, "Perla", "58968939", "perla@hotmail.com", 6));
         listaContactos.add(new Contacto(idContacto, R.drawable.mt_03, "Juana", "45879639", "juana2016@hotmail.com", 2));
         listaContactos.add(new Contacto(idContacto, R.drawable.mt___r15, "Alan", "45879639", "alan@hotmail.com", 8));
-        return listaContactos;
+        return listaContactos;*/
+
+        BaseDatos db = new BaseDatos(context);
+        return db.obtenerTodosLosContactos();
+    }
+
+    public void insertarContactos(BaseDatos db){
+        //idContacto ++;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_NOMBRE, "Edwin de León");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_TELEFONO, "2233-9689");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_EMAIL, "edwindeleon@yahoo.com");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_FOTO, R.drawable.mt_03);
+
+        db.insertarContacto(contentValues);
+
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_NOMBRE, "Fer");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_TELEFONO, "5633-9689");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_EMAIL, "fer@yahoo.com");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_FOTO, R.drawable.mt___r15);
+
+        db.insertarContacto(contentValues);
+
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_NOMBRE, "Guerra");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_TELEFONO, "3698-9689");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_EMAIL, "guerra1098@yahoo.com");
+        contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_FOTO, R.drawable.mt___r15);
+
+        db.insertarContacto(contentValues);
     }
 }

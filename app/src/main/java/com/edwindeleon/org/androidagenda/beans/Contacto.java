@@ -22,6 +22,10 @@ public class Contacto {
         this.like = like;
     }
 
+    public Contacto(){
+
+    }
+
     public int getIdContacto() { return idContacto; }
 
     public void setIdContacto(int idContacto) { this.idContacto = idContacto; }
