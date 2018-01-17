@@ -18,6 +18,7 @@ import com.edwindeleon.org.androidagenda.R;
 import com.edwindeleon.org.androidagenda.activities.Contactos;
 import com.edwindeleon.org.androidagenda.activities.DetalleContactos;
 import com.edwindeleon.org.androidagenda.beans.Contacto;
+import com.edwindeleon.org.androidagenda.db.ConstructorContactos;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,11 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
 
         contactoViewHolder.btnLike.setOnClickListener((View activity) -> {
             Toast.makeText(activity.getContext(), "Diste like a: " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
+
+            ConstructorContactos constructorContactos = new ConstructorContactos(activity.getContext());
+            constructorContactos.darLikeContacto(contacto);
+
+            contactoViewHolder.tvLikes.setText(constructorContactos.obtenerLikesContactos(contacto));
         });
     }
 

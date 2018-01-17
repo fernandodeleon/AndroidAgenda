@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 public class ConstructorContactos {
 
-    //public int idContacto = 0;
+    private static final int LIKE = 1;
+    private int idContacto = 1;
     private Context context;
 
     public ConstructorContactos(Context context){
@@ -34,6 +35,7 @@ public class ConstructorContactos {
         return listaContactos;*/
 
         BaseDatos db = new BaseDatos(context);
+        insertarContactos(db);
         return db.obtenerTodosLosContactos();
     }
 
@@ -60,5 +62,18 @@ public class ConstructorContactos {
         contentValues.put(ConstantesBaseDatos.TABLE_CONTACTS_FOTO, R.drawable.mt___r15);
 
         db.insertarContacto(contentValues);
+    }
+
+    public void darLikeContacto(Contacto contacto){
+        BaseDatos db = new BaseDatos(context);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO, contacto.getIdContacto());
+        contentValues.put(ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES, LIKE);
+        db.insertarLikeContacto(contentValues);
+    }
+
+    public int obtenerLikesContactos(Contacto contacto){
+        BaseDatos db = new BaseDatos(context);
+        return db.obtenerLikesContacto(contacto);
     }
 }

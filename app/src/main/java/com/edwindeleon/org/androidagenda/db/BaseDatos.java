@@ -9,7 +9,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.edwindeleon.org.androidagenda.beans.Contacto;
 
+import java.sql.SQLDataException;
 import java.util.ArrayList;
+import java.util.zip.CheckedOutputStream;
 
 /**
  * Created by Fernando de León on 15/01/2018.
@@ -37,7 +39,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         String queryCrearTablaLikesContacto = "CREATE TABLE " + ConstantesBaseDatos.TABLE_LIKES_CONTACT + "(" +
                 ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO + " INTEGER, " +
-                ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + " INTEGER " +
+                ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + " INTEGER, " +
                 "FOREIGN KEY ("+ ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO + ") " +
                 "REFERENCES " + ConstantesBaseDatos.TABLE_CONTACTS + "(" + ConstantesBaseDatos.TABLE_CONTACTS_ID + ")" +
                 ")";
@@ -81,5 +83,28 @@ public class BaseDatos extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(ConstantesBaseDatos.TABLE_CONTACTS, null, contentValues);
         db.close();
+    }
+
+    public void insertarLikeContacto(ContentValues contentValues){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(ConstantesBaseDatos.TABLE_LIKES_CONTACT, null, contentValues);
+        db.close();
+    }
+
+    public int obtenerLikesContacto(Contacto contacto){
+        int likes = 0;
+
+        String query = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + ")" +
+            " FROM " + ConstantesBaseDatos.TABLE_LIKES_CONTACT +
+                " WHERE "+ ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO + "=" + contacto.getIdContacto();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor registros = db.rawQuery(query, null);
+        if(registros.moveToNext()){
+            likes = registros.getInt(0);
+        }
+        db.close();
+
+        return likes;
     }
 }
