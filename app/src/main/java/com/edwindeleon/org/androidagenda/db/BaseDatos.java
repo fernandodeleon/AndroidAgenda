@@ -70,7 +70,17 @@ public class BaseDatos extends SQLiteOpenHelper {
             contactoActual.setCorreo(registros.getString(3));
             contactoActual.setFoto(registros.getInt(4));
 
-            //agregue comentarios
+            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + ") as likes" +
+                    " FROM " + ConstantesBaseDatos.TABLE_LIKES_CONTACT +
+                    " WHERE "+ ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO + " = " + contactoActual.getIdContacto();
+            Cursor registrosLikes = db.rawQuery(queryLikes, null);
+
+            if(registrosLikes.moveToNext()){
+                contactoActual.setLike(registrosLikes.getInt(0));
+            }else{
+                contactoActual.setLike(0);
+            }
+
             contactos.add(contactoActual);
             //contactoActual.setLike();
         }

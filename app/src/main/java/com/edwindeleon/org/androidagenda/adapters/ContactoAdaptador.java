@@ -62,7 +62,6 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             activity.getContext().startActivity(intent);
         });
 
-
         contactoViewHolder.btnLike.setOnClickListener((View activity) -> {
             Toast.makeText(activity.getContext(), "Diste like a: " + contacto.getNombre(), Toast.LENGTH_SHORT).show();
 
