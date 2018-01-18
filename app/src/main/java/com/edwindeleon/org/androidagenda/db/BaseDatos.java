@@ -70,6 +70,7 @@ public class BaseDatos extends SQLiteOpenHelper {
             contactoActual.setCorreo(registros.getString(3));
             contactoActual.setFoto(registros.getInt(4));
 
+            //agregue comentarios
             contactos.add(contactoActual);
             //contactoActual.setLike();
         }
