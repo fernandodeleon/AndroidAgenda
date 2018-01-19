@@ -68,7 +68,7 @@ public class ContactoAdaptador extends RecyclerView.Adapter<ContactoAdaptador.Co
             ConstructorContactos constructorContactos = new ConstructorContactos(activity.getContext());
             constructorContactos.darLikeContacto(contacto);
 
-            contactoViewHolder.tvLikes.setText(constructorContactos.obtenerLikesContactos(contacto));
+            //contactoViewHolder.tvLikes.setText(constructorContactos.obtenerLikesContactos(contacto));
         });
     }
 

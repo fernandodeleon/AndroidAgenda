@@ -50,8 +50,8 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + ConstantesBaseDatos.TABLE_CONTACTS);
-        db.execSQL("DROP TABLE IF EXISTS " + ConstantesBaseDatos.TABLE_LIKES_CONTACT);
+        db.execSQL("DROP TABLE IF EXIST " + ConstantesBaseDatos.TABLE_CONTACTS);
+        db.execSQL("DROP TABLE IF EXIST " + ConstantesBaseDatos.TABLE_LIKES_CONTACT);
         onCreate(db);
     }
 
@@ -70,7 +70,7 @@ public class BaseDatos extends SQLiteOpenHelper {
             contactoActual.setCorreo(registros.getString(3));
             contactoActual.setFoto(registros.getInt(4));
 
-            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + ") as likes" +
+            String queryLikes = "SELECT COUNT(" + ConstantesBaseDatos.TABLE_LIKES_CONTACT_NUMERO_LIKES + ") as like" +
                     " FROM " + ConstantesBaseDatos.TABLE_LIKES_CONTACT +
                     " WHERE "+ ConstantesBaseDatos.TABLE_LIKES_CONTACT_ID_CONTACTO + " = " + contactoActual.getIdContacto();
             Cursor registrosLikes = db.rawQuery(queryLikes, null);

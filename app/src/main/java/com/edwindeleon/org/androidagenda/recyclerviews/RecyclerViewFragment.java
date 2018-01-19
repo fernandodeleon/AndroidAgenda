@@ -61,7 +61,7 @@ public class RecyclerViewFragment extends Fragment implements IRecyclerViewFragm
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         listaReciclaContactos.setLayoutManager(llm);*/
 
-        GridLayoutManager glm = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager glm = new GridLayoutManager(getActivity(), 1);
         listaReciclaContactos.setLayoutManager(glm);
     }
 
